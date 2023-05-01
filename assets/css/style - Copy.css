@@ -1,0 +1,489 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;  
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+ul,li,ol {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.btn {
+    color: #FFFFFF;
+    background: #3699FF;
+    transition: color 0.35s ease;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px 26px;
+    text-decoration: none;
+    border-radius: 5px;
+    line-height: 1.5;
+}
+.btn:hover {
+    color: #FFFFFF;
+    background: #3699FF;
+}
+
+/* ================================= header====================================== */
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 25px;
+    height: 90px;
+}
+header > .left-part > a {
+    display: block;
+}
+header > .left-part > a > img { 
+    width: 150px;
+}
+
+.content {
+    padding: 25px 0;
+    background-color: #eef0f8;
+    height: calc(100vh - 145px);
+    overflow: auto;
+}
+
+.covid-btn {
+    background: #8950FC;
+    padding: 25px 35px;
+}
+.covid-btn:hover {
+    background: #8950FC;
+}
+
+.vaccine-btn, .vaccine-btn:hover {
+    background: #F64E60;
+    padding: 25px 35px;
+}
+.bookingbtngroup > .btn svg {
+    fill: #EEE5FF;
+    width: 19px;
+    height: 19px;
+}
+/* ================== Login page css======================= */
+.login-page {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+}
+.login-page > .left-part {
+    width:45%;
+    height: 100%;
+    background-color: #F2C98A;
+    padding-top: 10rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.login-page > .left-part .loginlogolink { 
+    display:block;
+    margin: 0 auto 2.5rem;
+    
+}
+.login-page > .left-part .loginlogolink img { 
+    width: 150px;
+}
+
+.login-page > .left-part h3 {
+    color: #986923;
+    font-size: 26px;
+    font-weight: 600;
+}
+.login-page > .left-part > .aside-img {
+    background: url(../img/login-visual.svg) bottom 0 center no-repeat;
+    
+    min-height: inherit;
+    background-size: contain;
+    height: 500px;
+    margin: 0 15px;
+}
+
+.login-page > .right-part { 
+    width: 55%;
+    padding: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-direction: column;
+}
+.login-page > .right-part .login-form {
+    max-width: 450px;
+    width: 100%;
+}
+
+.login-title {
+    margin-bottom: 50px;
+}
+.login-title h3 {
+    font-size: 25px;
+    color: #181C32;
+    font-weight: 600;
+}
+
+.login-title >  span {
+    font-weight: 500;
+    color: #B5B5C3 ;
+    font-size: 20px;
+}
+.login-title >  span > a {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+
+.login-page > .right-part .login-form  .form-group label,
+.login-page > .right-part .login-form  .forgotpassword {
+    font-size: 16px;
+    color: #181C32;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.login-page > .right-part .login-form  .form-group .form-control {
+    background-color: #EBEDF3;
+    border-color: #EBEDF3;
+    color: #3F4254;
+    transition: all .3s ;
+    padding: 15px;
+    border-radius: 15px;
+    border: 1px solid #E4E6EF;
+    position: relative;    
+}
+.login-page > .right-part .login-form  .forgotpassword {
+    text-decoration: none;
+    color: #3699FF;
+}
+
+
+.login-page > .right-part  .login-link { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    padding: 0 0 15px;
+    margin: 0;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-top: 0;
+    transform: translate(-50%,0);
+    width: 430px;
+}
+
+.login-page > .right-part  .login-link a  { 
+text-decoration: none;
+color: #3699FF;
+font-size: 16px;
+font-weight: 500;
+}
+.login-page > .right-part  .login-link li + li {
+    margin-left: 10px;
+}
+
+
+/* ================== Dashboard css ======================= */
+.dashboard-page header .left-part h4  {
+    color: #000;
+    font-size: 16px;
+    margin-bottom: 0;
+}
+.dashboard-page header .userinfo {
+    position: relative;
+    padding-bottom: 5px;
+    cursor: pointer;
+    padding-right: 15px;
+}
+.dashboard-page header .userinfo:after {
+    position:absolute;
+    top: 2px;
+    width: 8px;
+    height: 8px;
+    content: "";
+    border-top: 1px solid #000;
+    border-left: 1px solid #000;
+    right: 0;
+    transform: rotate(-134deg);
+}
+.dashboard-page header .userinfo h5 {
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+.dashboard-page header .userinfo > ul {
+    padding: 10px 0;
+    box-shadow: 0 0 10px #d6d6d6;
+    border-radius: 5px;
+    position:absolute;
+    top: 25px;
+    width: 100%;
+    max-width: 150px;
+    /* height: 100px; */
+    border: 1px solid #d6d6d6;
+    right: 0;
+    background-color: #fff;
+    display: none;
+}
+
+.dashboard-page header .userinfo > ul:after {
+    position: absolute;
+    top: -5px;
+    right: 50%;
+    width: 8px;
+    height: 8px;
+    background-color: #fff;
+    content: "";
+    border-top: 1px solid #d6d6d6;
+    border-left: 1px solid #d6d6d6;
+    transform: rotate(45deg);
+    margin-right: -4px;
+}
+
+.dashboard-page header .userinfo > ul >li > a{
+    color: #000;
+    font-size: 14px;
+    text-decoration: none;
+    padding:  0px 10px 0;
+    width: 100%;
+    display: block;
+    line-height: 1;
+}
+.dashboard-page header .userinfo > ul >li + li > a{
+    padding-top:  10px;
+}
+
+.dashboard-page header .userinfo:hover > ul  {
+    display: block;
+}
+
+.tp-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tp-list > li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #3699FF;
+    border-radius: 5px;
+    padding: 25px;
+    margin-top: 15px;
+    box-shadow: 0 0 10px #eee;
+    width: calc(100%/4 - 12px);
+}
+.tp-list  li + li {
+    margin-left: 15px;
+}
+
+.tp-list  li  h4 { 
+    font-size: 14px;
+    margin-bottom: 0;
+    color: #ffff;
+    /* width: 100px; */
+}
+.tp-list  li > h6 {
+    font-size: 14px;
+    color: #ffff;
+    margin-bottom: 0;
+    margin-left: 10px;
+
+}
+
+
+/* ==================== edit Profile ======================== */
+.editprofile-page h3,
+.profile-page h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 20px 0 50px ;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.editprofile-img img {
+    width:100%;
+    border-radius: 10px;
+}
+.editform, .passwordedit {
+    margin-left: 50px;
+}
+.editform label, .passwordedit label {
+   font-size: 12px;
+   font-weight: 500;
+}
+.editform .form-control, .passwordedit .form-control {
+    background: transparent;
+    border: navajowhite;
+    border-bottom: 1px solid #bababa;
+    border-radius: 0;
+    padding-left: 5px;
+    /* box-shadow: 9px 3px 4px rgb(173 167 167 / 10%); */
+    font-size: 14px;
+    font-weight: 400;
+    box-shadow: none;
+}
+
+.editform .btn, .passwordedit .btn {
+    font-size: 15px;
+    padding: 6px 26px;
+}
+
+
+.editprofile-page h4{
+    margin: 50px 0 15px 50px;
+    font-size: 20px;
+}
+
+/* ================== profile-page ======================= */
+.profile-list{
+    margin-top: 50px;
+}
+
+.profile-list li  {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.profile-list li h6 {
+    width: 150px;
+    line-height: 1.5;
+    color: #000;
+    margin-bottom: 0;
+}
+
+.profile-list li p{
+    font-size: 14px;
+    color: grey;
+    width: calc(100% - 150px);
+    font-weight: 300;
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+/* ================== footer css======================= */
+
+
+
+footer {
+    padding: 15px 25px;
+}
+
+footer >p,
+.login-page > .right-part  .login-link li > span {
+    color: #B5B5C3;
+    font-weight: 400;
+}
+
+footer p > a,
+.login-page > .right-part  .login-link li > span > a {
+    color: #3F4254 ;
+    text-decoration: none;
+}
+
+
+@media(max-width:991.50px){
+    .login-page {
+        display: block;
+        height: auto;
+
+    }
+    .login-page > .left-part{
+        width: 100%;
+        padding: 50px 0
+    }
+    .login-page > .left-part > .aside-img {
+        display: none;
+    }
+    .login-page > .right-part {
+        width: 100%;
+    }
+    .login-page > .right-part .login-link{
+        position: relative;
+        left: 0;
+        transform: none;
+        padding: 25px 0 10px;
+    }
+    .tp-list > li{
+        width: calc(100%/3 - 10px);
+    }
+    .tp-list li:nth-child(3n+1){
+        margin-left: 0;
+    }
+    .dashboard-page header{
+        height: 60px;
+    }
+    .dashboard-page .content {
+        height: calc(100vh - 115px);
+        padding: 10px 0;
+    }
+    .dashboard-page header .userinfo {
+        padding-bottom: 0;
+    }
+    .editform, .passwordedit, .editprofile-page h4 {
+        margin-left: 10px;
+    }
+
+}
+
+@media(max-width:767.50px){
+   
+    .tp-list li:nth-child(3n+1){
+        margin-left: 15px;
+    }
+    .tp-list li:nth-child(2n+1){ 
+        margin-left: 0;
+    }
+    .tp-list > li{
+        width: calc(100%/2 - 8px);
+        padding:20px 10px;
+    }
+    .editform, .passwordedit, .editprofile-page h4 {
+        margin-left: 0;
+    }
+    .editprofile-page h4 {
+        font-size: 18px;
+    }
+
+}
+@media(max-width:575.5px){
+    .tp-list li{
+        width: 100%;
+    } 
+    
+    .tp-list li + li,.tp-list li:nth-child(3n+1){
+        margin-left: 0;
+    }
+    .profile-list {
+        margin-top: 20px;
+    }
+    .profile-list li{
+        margin-bottom: 10px;
+    }
+    .profile-list li h6 {
+        width: 110px;
+    }
+    .profile-list li p{
+        width: calc(100% - 110px);
+    }
+}
+
+
