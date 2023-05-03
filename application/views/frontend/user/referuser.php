@@ -28,20 +28,13 @@
 ?>
 
 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/css/intlTelInput.min.css" rel="stylesheet"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/intlTelInput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <div class="content editprofile-page">
     <!-- <div class="container"> -->
-    <?php
-        if ($this->session->flashdata('success')) {
-            echo '<div class="alert alert-success">' . $this->session->flashdata('success') . '</div>';
-        } else if ($this->session->flashdata('error')) {
-            echo '<div class="alert alert-danger">' . $this->session->flashdata('error') . '</div>';
-        }
-    ?>
+    <h2 id="success_msg" style="color:green; font-size:20px; font-style:italic;"></h2>
+                        <h2 id="error_msg"  style="color:red; font-size:20px; font-style:italic;"></h2>
        
                 <h3>Refer Patient</h3>
             
@@ -166,8 +159,7 @@
                             <input type="submit" class='btn' value='Refer' />
                         </div>
 
-                        <h2 id="success_msg" style="color:green; font-size:14px; font-style:italic;"></h2>
-                        <h2 id="error_msg"  style="color:red; font-size:14px; font-style:italic;"></h2>
+                        
 
                         
                     </div>
@@ -177,21 +169,7 @@
     
 </div>
 
-<script>
-var phone_number = window.intlTelInput(document.querySelector("#phone_number"), {
-  separateDialCode: true,
-  preferredCountries:["ke","in"],
-  hiddenInput: "full",
-  utilsScript: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/utils.js"
-});
 
-$("form").submit(function() {
-  var full_number = phone_number.getNumber(intlTelInputUtils.numberFormat.E164);
-$("input[name='phone_number[full]'").val(full_number);
-    document.getElementById("fullNumber").value = full_number;
-   
-});
-</script>
 
 
 
@@ -245,4 +223,22 @@ $("input[name='phone_number[full]'").val(full_number);
         }
 	});
 });
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/intlTelInput.min.js"></script>
+
+<script>
+var phone_number = window.intlTelInput(document.querySelector("#phone_number"), {
+  separateDialCode: true,
+  preferredCountries:["ke","in"],
+  hiddenInput: "full",
+  utilsScript: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/utils.js"
+});
+
+$("#phone_number").keyup(function(){
+    var full_number = phone_number.getNumber(intlTelInputUtils.numberFormat.E164);
+    // $("input[name='phone_number[full]'").val(full_number);
+    document.getElementById("fullNumber").value = full_number;
+  });
 </script>
