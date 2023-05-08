@@ -29,9 +29,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 
-// $config['base_url'] = 'http://18.134.143.75/';
+$config['base_url'] = 'http://18.134.143.75/';
 
-$config['base_url'] = 'http://localhost/nidhin/';
+// $config['base_url'] = 'http://localhost/nidhin/';
 
 /*
 |--------------------------------------------------------------------------
