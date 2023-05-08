@@ -49,6 +49,7 @@
         outline: none;
         border: none;
         transition: .5s;
+        margin-top:15px;
     }
 
     .new-post button:hover {
@@ -66,6 +67,9 @@
     li:hover {
     background-color: transparent !important;
     color:black !important;
+  }
+  .radio_label{
+    margin-left:10px;
   }
 </style>
 
@@ -89,10 +93,10 @@
                         <fieldset id="userType">
                             <div class="row mb-4">
                                 <div class="col-md-6">
-                                    <input type="radio" name="userType" value="Hospital">Hospital</input>
+                                    <input type="radio" name="userType" value="Hospital"><label class="radio_label">Hospital</label></input>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="radio" name="userType" value="Doctor">Doctor</input>
+                                    <input type="radio" name="userType" value="Doctor"><label class="radio_label">Doctor</label></input>
                                 </div>
                             </div>
                         </fieldset>

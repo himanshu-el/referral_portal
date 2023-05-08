@@ -14,6 +14,8 @@
         $branch_code = $value['branch_code'];
         $other_bank = $value['other_bank'];
     }
+
+    $speciality = $this->db->get('speciality')->result_array();
 ?>
 
 
@@ -44,7 +46,20 @@
             </div>
             <div class="col-sm-10 ps-md-5">
                 <h5><?php echo $user_name?></h5>
-                <p><?php echo $user_speciality?></p>
+                <p><?php 
+                    $explode_dotor_spec = explode(',',$user_speciality);
+                    for($i=0; $i<count($explode_dotor_spec); $i++){
+                        foreach($speciality as $special){
+                            if($special['id'] == $explode_dotor_spec[$i]){
+                                if($i == 0){
+                                    echo $special['speciality_name'];
+                                }else{
+                                    echo ', '.$special['speciality_name'];
+                                }
+                            }
+                        }
+                    }
+                    ?></p>
 
                 <ul class="profile-list">
                     <li>

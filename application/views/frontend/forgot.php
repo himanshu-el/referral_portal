@@ -32,7 +32,7 @@
             echo '<div class="alert alert-danger">' . $this->session->flashdata('error') . '</div>';
         }
         ?>
-                    <form action="" method="post">
+                    <form action="<?php echo base_url()?>frontend/forgot/reset_pass" method="post">
                         <div class=" login-title">
                         <h3 class="">Welcome to Nairobiwesthospital</h3>
                         <!-- <span class="text-muted font-weight-bold font-size-h4">New Here?

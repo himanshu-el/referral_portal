@@ -12,7 +12,7 @@ class Referuser extends CI_controller
     public function index(){
         $this->load->view('frontend/user/common/header');
         $this->load->view('frontend/user/referuser');
-        $this->load->view('frontend/user/common/footer');
+        // $this->load->view('frontend/user/common/footer');
     }
 
 

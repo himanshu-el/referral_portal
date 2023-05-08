@@ -51,10 +51,18 @@ class Referlist extends CI_controller
             $newData = $final_result->result[0]->data;
         }
 
-        $i = 1;
-        foreach ($newData as $key => $value) { 
-            $arrya_json[] = array($i, $value->REFERALNUMBER,$value->REFERALDATE,$value->REFERALTYPE,$value->PATIENTNAME,$value->MOBILENUMBER, $value->NATIONALID, $value->PATIENTVISITED);
-        $i++;}
+
+        // print_r($newData);
+
+        if($newData == null){
+            $arrya_json[] = array('','','','No Record Found','','','','');
+        }else{
+            $i = 1;
+            foreach ($newData as $key => $value) { 
+                $arrya_json[] = array($i, $value->REFERALNUMBER,$value->REFERALDATE,$value->REFERALTYPE,$value->PATIENTNAME,$value->MOBILENUMBER, $value->NATIONALID, $value->PATIENTVISITED);
+            $i++;}
+        }
+
         echo json_encode(array('data'=>$arrya_json));
     }
 

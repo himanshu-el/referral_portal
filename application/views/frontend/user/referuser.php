@@ -8,7 +8,12 @@
     input[type="radio"]{
         margin-right:10px;
     }
-    
+    .success_mesg{
+        width:500px;
+        position: absolute;
+        right:20px;
+        top:20px;
+    }
     
 </style>
 
@@ -26,16 +31,27 @@
     $createArray = explode(',', $specialityIDS);
     $length = count($createArray);
 ?>
-
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+  </symbol>
+  <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+  </symbol>
+  <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+  </symbol>
+</svg>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/css/intlTelInput.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <div class="content editprofile-page">
-    <!-- <div class="container"> -->
-    <h2 id="success_msg" style="color:green; font-size:20px; font-style:italic;"></h2>
-                        <h2 id="error_msg"  style="color:red; font-size:20px; font-style:italic;"></h2>
-       
+    <div class="container">
+                    
+                <div class="success_mesg" id="success_msg"></div>
+                <div class="success_mesg" id="branch_error"></div>
+                <div class="success_mesg" id="error_msg"></div>
                 <h3>Refer Patient</h3>
             
             
@@ -53,7 +69,7 @@
                                     <?php }?>
                                 </div>
                             </fieldset>
-                            <span id="branch_error" class="text-danger m-0 p-0"></span></br>
+                            
                         </div>
                         <div class='col-md-6 mb-3'>
                             <label>Referral Type <span style="color:red;">*</span></label>
@@ -63,19 +79,19 @@
                                 <option value="ADMISSION">ADMISSION</option>
                                 <option value="DIAGNOSIS ONLY">DIAGNOSIS ONLY</option>
                             </select>
-                            <span id="referral_type" class="text-danger m-0 p-0"></span></br>
+                        
                         </div>
                         <div class='col-md-6 mb-3'>
                             <label>National Id <span style="color:red;">*</span></label>
                             <input type="text" name="nationalid" class="form-control" placeholder="Enter National Id" />
-                            <span id="national_id" class="text-danger m-0 p-0"></span></br>
+                    
                         </div>
                         
 
                         <div class='col-md-4 mb-3'>
                             <label>Patient First Name <span style="color:red;">*</span></label>
                             <input type="text" name="patientfirstname" class="form-control" placeholder="Enter Patient First Name" />
-                            <span id="first_name" class="text-danger m-0 p-0"></span></br>
+                           
                         </div>
                         <div class='col-md-4 mb-3'>
                             <label>Patient Middle Name</label>
@@ -84,20 +100,20 @@
                         <div class='col-md-4 mb-3'>
                             <label>Patient Last Name <span style="color:red;">*</span></label>
                             <input type="text" name="patientlastname" class="form-control" placeholder="Enter Patient Last Name" />
-                            <span id="last_name" class="text-danger m-0 p-0"></span></br>
+                    
 
                         </div>
                         <div class='col-md-4 mb-3' id="result">
                             <label>Mobile Number <span style="color:red;">*</span></label>
                             <input type="hidden" id="fullNumber" name="mobileno" class="form-control" placeholder="Enter Mobile Number" />
                             <input type="tel" name="phone_number[main]" id="phone_number"   class="form-control" />
-                            <span id="mob_number" class="text-danger m-0 p-0"></span></br>
+                           
 
                         </div>
                         <div class='col-md-4 mb-3'>
                             <label>Email <span style="color:red;">*</span></label>
                             <input type="email" name="emailid" class="form-control" placeholder="Enter Email" />
-                            <span id="email" class="text-danger m-0 p-0"></span></br>
+                            
                         </div>
 
                         <div class='col-md-4 mb-3'>
@@ -166,7 +182,7 @@
                     <?php echo form_close(); ?>
           
         </div>
-    
+                                            </div>
 </div>
 
 
@@ -190,15 +206,19 @@
         data : form_data, 
     }).done(function(response){ 
 		if(response.status == "error"){
-            $('#branch_error').html(response.branchcode);
-            $('#email').html(response.emailid);
-            $('#mob_number').html(response.mobileno);
-            $('#national_id').html(response.nationalid);
-            $('#first_name').html(response.patientfirstname);
-            $('#last_name').html(response.patientlastname);
-            $('#referral_type').html(response.referraltype);
+            $('#branch_error').html(`<div class="alert alert-danger d-flex align-items-center" role="alert"><svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg><div>${response.branchcode} ${response.emailid} ${response.mobileno} ${response.nationalid} ${response.patientfirstname} ${response.patientlastname} ${response.referraltype}</div></div>`);
             $('#success_msg').html('');
             $('#error_msg').html('');
+
+            setTimeout(function() {
+                $('#branch_error').html('');
+                $('#email').html('');
+                $('#mob_number').html('');
+                $('#national_id').html('');
+                $('#first_name').html('');
+                $('#last_name').html('');
+                $('#referral_type').html('');
+            }, 3000)
         }else if(response.status == "apierror"){
             $('#branch_error').html('');
             $('#email').html('');
@@ -208,8 +228,10 @@
             $('#last_name').html('');
             $('#referral_type').html('');
             $('#success_msg').html('');
-
-            $('#error_msg').html(response.msg);
+            $('#error_msg').html(`<div class="alert alert-danger d-flex align-items-center" role="alert"><svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg><div>${response.msg}</div></div>`);
+            setTimeout(function() {
+                $('#error_msg').html('');
+            }, 3000)
         }else{
             $('#error_msg').html('');
             $('#branch_error').html('');
@@ -219,7 +241,11 @@
             $('#first_name').html('');
             $('#last_name').html('');
             $('#referral_type').html('');
-            $('#success_msg').html(response.msg);
+            $('#success_msg').html(`<div class="alert alert-success d-flex align-items-center" role="alert"><svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg><div>${response.msg}</div></div>`);
+            document.getElementById("referForm").reset();
+            setTimeout(function() {
+                $('#success_msg').html('');
+            }, 3000)
         }
 	});
 });
