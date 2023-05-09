@@ -110,22 +110,29 @@ class Createdoctor extends CI_controller
             'refer_code' => $this->input->post('refer_code')
         );
 
-        $from = "info@externlabs.com";
+        $this->load->config('email');
+        $this->load->library('email');
+    
+        $from = $this->config->item('smtp_user');
         $to = $email;
-        $subject = "Welcome Test";
-        $message = "Hello $name,
-        welcome on referral Portal Your Login Details are given Below:
-        Email : $email
-        Password: $password
+        $subject = "Welcome To Refer Portal";
+        $message = "<p>Hello, ".$name."</p>
+        <p>welcome on referral Portal Your Login Details are given Below:</p>
+        <p>Email: ".$email."</p>
+        <p>Password: ".$password."</p></br>
+        <p>Thank You</p>
+                  ";
 
-        Thank You
-        ";
-        $headers = "From:" . $from;
+        $this->email->set_newline("\r\n");
+        $this->email->from($from,'Identification');
+        $this->email->to($to);
+        $this->email->subject($subject);
+        $this->email->message($message);
 
         if ($this->Usermodel->create_doctor($data)) {
-            mail($to,$subject,$message, $headers);
-            $this->session->set_flashdata('success', 'User Created Successfully');
-            redirect(base_url() . 'admin/createdoctor');
+          $this->email->send();
+          $this->session->set_flashdata('success', 'User Created Successfully');
+          redirect(base_url() . 'admin/createdoctor');
         } else {
 
             $this->session->set_flashdata('error', 'Error In Submission');

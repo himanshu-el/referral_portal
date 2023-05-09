@@ -25,9 +25,6 @@ class Createuser extends CI_controller
     $this->load->model('admin/Usermodel');
 
       $this->input->post('formSubmit');
-    //   $this->form_validation->set_rules('admission', 'Name', 'required');
-    //   $this->form_validation->set_rules('opd', 'product size', 'required');
-    //   $this->form_validation->set_rules('diagnosis_only', 'dispetch time', 'required');
       $this->form_validation->set_rules('national_id', 'state', 'required');
       $this->form_validation->set_rules('name', 'shipment_port', 'required');
       $this->form_validation->set_rules('number', 'link', 'required');

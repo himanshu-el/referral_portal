@@ -91,29 +91,6 @@ class Referuser extends CI_controller
                 'username'      => $username,
             );
 
-            $refer_data = array(
-                'nationalid'      => $this->input->post('nationalid'),
-                'referraltype' => $this->input->post('referraltype'),
-                'patientfirstname'    => $this->input->post('patientfirstname'),
-                'patientlastname'      => $this->input->post('patientlastname'),
-                'mobileno' => $this->input->post('mobileno'),
-                'emailid'    => $this->input->post('emailid'),
-                'xray'      => $xray,
-                'mri' => $mri,
-                'ctscan'    => $ctscan,
-                'ultrasound'      => $ultrasound,
-                'echoscan' => $echoscan,
-                'branchcode'    => $this->input->post('branchcode'),
-                'patientmiddlename'      => $this->input->post('patientmiddlename'),
-                'specialitycode' => $this->input->post('specialitycode'),
-                'clinicalnotes'    => $this->input->post('clinicalnotes'),
-                'labtestdetails'      => $this->input->post('labtestdetails'),
-                'radiologynotes' => $this->input->post('radiologynotes'),
-                'otherinvestigation'    => $this->input->post('otherinvestigation'),
-                'referalhospitalcode'      => $referCode,
-                'username'      => $doctor_id,
-            );
-
             $data_string = json_encode($data);
 
             $curl = curl_init('http://api.nairobiwesthospital.com:90/datasnap/rest/tnwhapi/referral/');
@@ -128,7 +105,34 @@ class Referuser extends CI_controller
             curl_close($curl);
             $final_result = json_decode($result);
 
-            if($final_result->result[0]->success == true){
+            $checkstatus = $final_result->result[0]->success;
+
+            if( $checkstatus == 'true'){
+                $refer_data = array(
+                    'nationalid'      => $this->input->post('nationalid'),
+                    'referraltype' => $this->input->post('referraltype'),
+                    'patientfirstname'    => $this->input->post('patientfirstname'),
+                    'patientlastname'      => $this->input->post('patientlastname'),
+                    'mobileno' => $this->input->post('mobileno'),
+                    'emailid'    => $this->input->post('emailid'),
+                    'xray'      => $xray,
+                    'mri' => $mri,
+                    'ctscan'    => $ctscan,
+                    'ultrasound'      => $ultrasound,
+                    'echoscan' => $echoscan,
+                    'branchcode'    => $this->input->post('branchcode'),
+                    'patientmiddlename'      => $this->input->post('patientmiddlename'),
+                    'specialitycode' => $this->input->post('specialitycode'),
+                    'clinicalnotes'    => $this->input->post('clinicalnotes'),
+                    'labtestdetails'      => $this->input->post('labtestdetails'),
+                    'radiologynotes' => $this->input->post('radiologynotes'),
+                    'otherinvestigation'    => $this->input->post('otherinvestigation'),
+                    'referalhospitalcode'      => $referCode,
+                    'username'      => $doctor_id,
+                    'referralno' => $final_result->result[0]->referralno,
+                    'referraldate' => $final_result->result[0]->referraldate
+                );
+
                 if($this->Refermodel->refer_patint($refer_data)){
                     $array = array(
                         'status'   => "success",
@@ -143,7 +147,7 @@ class Referuser extends CI_controller
             }else{
                 $array = array(
                     'status'   => "apierror",
-                    'msg' => 'Api Failed!',
+                    'msg' => $final_result->result[0]->error_message,
                 );
             } 
         }else{

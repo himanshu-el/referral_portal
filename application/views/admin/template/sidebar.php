@@ -104,6 +104,10 @@ $parts = basename($url);
         <li class="nav-item <?php echo ($parts == 'speciality') ? "active" : "" ?>">
           <a class="nav-link " href="<?php echo base_url(); ?>admin/speciality"><i class="fas fa-fw fa-table"></i><span>Speciality</span></a>
         </li>
+
+        <li class="nav-item <?php echo ($parts == 'referlist') ? "active" : "" ?>">
+          <a class="nav-link " href="<?php echo base_url(); ?>admin/referlist"><i class="fas fa-fw fa-table"></i><span>Refer Patient List</span></a>
+        </li>
         <!-- Nav Item - Charts -->
 
 

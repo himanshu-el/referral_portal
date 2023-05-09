@@ -80,6 +80,7 @@ $db['default'] = array(
 	'password' => 'nwh@C0d3123',
 	// 'password' => '',
 	'database' => 'refer_portal',
+	// 'database' => 'nidhin',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => TRUE,

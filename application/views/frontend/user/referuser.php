@@ -73,7 +73,7 @@
                         </div>
                         <div class='col-md-6 mb-3'>
                             <label>Referral Type <span style="color:red;">*</span></label>
-                            <select name="referraltype" id=""  class="form-control" >
+                            <select name="referraltype" id=""  class="form-control" required >
                                 <option value="">Select Referral Type</option>
                                 <option value="OPD">OPD</option>
                                 <option value="ADMISSION">ADMISSION</option>
@@ -83,14 +83,14 @@
                         </div>
                         <div class='col-md-6 mb-3'>
                             <label>National Id <span style="color:red;">*</span></label>
-                            <input type="text" name="nationalid" class="form-control" placeholder="Enter National Id" />
+                            <input type="text" name="nationalid" class="form-control" placeholder="Enter National Id" required />
                     
                         </div>
                         
 
                         <div class='col-md-4 mb-3'>
                             <label>Patient First Name <span style="color:red;">*</span></label>
-                            <input type="text" name="patientfirstname" class="form-control" placeholder="Enter Patient First Name" />
+                            <input type="text" name="patientfirstname" class="form-control" placeholder="Enter Patient First Name" required />
                            
                         </div>
                         <div class='col-md-4 mb-3'>
@@ -99,20 +99,20 @@
                         </div>
                         <div class='col-md-4 mb-3'>
                             <label>Patient Last Name <span style="color:red;">*</span></label>
-                            <input type="text" name="patientlastname" class="form-control" placeholder="Enter Patient Last Name" />
+                            <input type="text" name="patientlastname" class="form-control" placeholder="Enter Patient Last Name" required/>
                     
 
                         </div>
                         <div class='col-md-4 mb-3' id="result">
                             <label>Mobile Number <span style="color:red;">*</span></label>
-                            <input type="hidden" id="fullNumber" name="mobileno" class="form-control" placeholder="Enter Mobile Number" />
-                            <input type="tel" name="phone_number[main]" id="phone_number"   class="form-control" />
+                            <input type="hidden" id="fullNumber" name="mobileno" class="form-control" placeholder="Enter Mobile Number" required/>
+                            <input type="tel" name="phone_number[main]" id="phone_number"   class="form-control" required/>
                            
 
                         </div>
                         <div class='col-md-4 mb-3'>
                             <label>Email <span style="color:red;">*</span></label>
-                            <input type="email" name="emailid" class="form-control" placeholder="Enter Email" />
+                            <input type="email" name="emailid" class="form-control" placeholder="Enter Email" required/>
                             
                         </div>
 
