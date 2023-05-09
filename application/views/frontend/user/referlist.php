@@ -45,8 +45,8 @@
 
 <div class="content">
     <div class="container">
-        <div class="">
-            <table id="example" class="table table-striped" style="width:100%">
+        <div class="table-responsive">
+            <table id="example" class="table table-striped " style="width:100%" >
                 <thead>
                     <tr>
                         <th>Sr. No.</th>
