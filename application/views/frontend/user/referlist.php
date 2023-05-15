@@ -68,19 +68,19 @@
                         <th>Labtest Details</th>
                         <th>Radiology Notes</th>
                         <th>Other Investigation</th>
-                        
-
-
                         <th>Patient Visited</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $i = 1; foreach($refer_list as $value){?>
+                    <?php $i = 1; 
+                   
+                    
+                    foreach($refer_list as $value){?>
                     <tr>
                         <td><?php echo $i;?></td>
                         <td><?php echo $value['referralno'] ?></td>
                         <td><?php echo $value['referraldate'] ?></td>
-                        <td><?php echo $value['referraltype'] ?></td>
+                        <td><?php if($value['referraltype'] == 1){ echo "OPD";}elseif($value['referraltype'] == 2){echo "ADDMISSION";}elseif($value['referraltype'] == 3){echo "DIAGNOSIS ONLY";}else{echo "N/A";}?></td>
                         <td><?php echo $value['patientfirstname'].' '.$value['patientmiddlename'].' '.$value['patientlastname']  ?></td>
                         <td><?php echo $value['mobileno'] ?></td>
                         <td><?php echo $value['emailid']?></td>

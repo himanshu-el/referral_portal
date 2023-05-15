@@ -75,31 +75,31 @@
                             <label>Referral Type <span style="color:red;">*</span></label>
                             <select name="referraltype" id=""  class="form-control" required >
                                 <option value="">Select Referral Type</option>
-                                <option value="OPD">OPD</option>
-                                <option value="ADMISSION">ADMISSION</option>
-                                <option value="DIAGNOSIS ONLY">DIAGNOSIS ONLY</option>
+                                <option value="1">OPD</option>
+                                <option value="2">ADMISSION</option>
+                                <option value="3">DIAGNOSIS ONLY</option>
                             </select>
                         
                         </div>
                         <div class='col-md-6 mb-3'>
                             <label>National Id <span style="color:red;">*</span></label>
-                            <input type="text" name="nationalid" class="form-control" placeholder="Enter National Id" required />
+                            <input type="text" name="nationalid" class="form-control" placeholder="Enter National Id" required maxlength="20"/>
                     
                         </div>
                         
 
                         <div class='col-md-4 mb-3'>
                             <label>Patient First Name <span style="color:red;">*</span></label>
-                            <input type="text" name="patientfirstname" class="form-control" placeholder="Enter Patient First Name" required />
+                            <input type="text" name="patientfirstname" class="form-control" placeholder="Enter Patient First Name" required   maxlength="20" />
                            
                         </div>
                         <div class='col-md-4 mb-3'>
                             <label>Patient Middle Name</label>
-                            <input type="text" name="patientmiddlename" class="form-control" placeholder="Enter Patient Middle Name" />
+                            <input type="text" name="patientmiddlename" class="form-control" placeholder="Enter Patient Middle Name"  maxlength="15"/>
                         </div>
                         <div class='col-md-4 mb-3'>
                             <label>Patient Last Name <span style="color:red;">*</span></label>
-                            <input type="text" name="patientlastname" class="form-control" placeholder="Enter Patient Last Name" required/>
+                            <input type="text" name="patientlastname" class="form-control" placeholder="Enter Patient Last Name" required  maxlength="15"/>
                     
 
                         </div>
@@ -112,7 +112,7 @@
                         </div>
                         <div class='col-md-4 mb-3'>
                             <label>Email <span style="color:red;">*</span></label>
-                            <input type="email" name="emailid" class="form-control" placeholder="Enter Email" required/>
+                            <input type="email" name="emailid" class="form-control" placeholder="Enter Email" required  maxlength="25"/>
                             
                         </div>
 
