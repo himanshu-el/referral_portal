@@ -122,7 +122,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <label for="">Refferal Code <span style="color:red;">*</span></label>
-                                <input type="text" placeholder="Enter Refferal Code" name="refer_code" required maxlength="5">
+                                <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" placeholder="Enter Refferal Code" name="refer_code"  required maxLength="5" >
                             </div>
                         </div>
                         <div class="row">
