@@ -1,7 +1,24 @@
-<link href="<?php echo base_url(); ?>admin/assets/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+<!-- <link href="<?php echo base_url(); ?>admin/assets/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url(); ?>admin/assets/css/core.css" rel="stylesheet" type="text/css" />
 
-<script src="<?php echo base_url(); ?>admin/assets/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url(); ?>admin/assets/js/jquery.dataTables.min.js"></script> -->
+
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+
+
+<script type="text/javascript" src="https://cdn.datatables.net/datetime/1.0.2/js/dataTables.dateTime.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/datetime/1.0.2/css/dataTables.dateTime.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css" />
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link href="<?php echo base_url(); ?>admin/assets/css/core.css" rel="stylesheet" type="text/css" />
 
 
 <style type="text/css">
@@ -48,17 +65,62 @@
     width: 70px;
     height: 70px;
   }
+  .doctor_select{
+    border:1px solid #cdcdcd;
+    border-radius:6px;
+    padding:.5rem;
+    margin-bottom:2rem;
+  }
+  .dt-button{
+    padding:0px !important;
+    margin:0px !important;
+    background:transparent !important;
+    border:none !important;
+  }
+  .excel_button{
+    width:7rem;
+    height:auto;
+    padding:.5rem 1rem;
+    border:1px solid #1d6f42;
+    border-radius:6px;
+    background-color:#1d6f42;
+    color:white;
+    margin-right:.5rem;
+  }
 </style>
 
 <?php 
     $refer_list = $this->db->get('patient')->result_array();
+
+    $doctor_list = $this->db->get('doctor')->result_array();
+
 ?>
 
 <div class="all_post">
   <div class="container">
     <h3>Refer Patient List</h3>
     <hr>
-
+    <h4>Fillter Doctor / Hospital Name</h4>
+        <div class="date_filter">
+            
+            <div class="row">
+                <div class="col-md-5">
+                    <!-- <input type="text"  name="min" id="min"  placeholder="Enter First date" autocomplete="off"/>  -->
+                    
+                    <select class="doctor_select" name="min" id="min">
+                        <option value="">Please Select Doctor / Hospital </option>
+                        <?php foreach($doctor_list as $doctors){?>
+                        <option value="<?php echo $doctors['id']?>"><?php echo $doctors['name']?> (<?php echo $doctors['email']?>)</option>
+                        <?php }?>
+                    </select>
+                </div>
+                <div class="col-md-7">
+                    
+                </div>
+            </div>    
+          
+          
+        </div> 
     <?php
         if ($this->session->flashdata('success')) {
             echo '<div class="alert alert-success">' . $this->session->flashdata('success') . '</div>';
@@ -103,43 +165,6 @@
 
               </thead>
               <tbody>
-               
-                   
-                  <?php $i = 1; foreach($refer_list as $value){?>
-                    <tr>
-                        <td><?php echo $i;?></td>
-                        
-
-
-                        <td><?php echo $value['referralno'] ?></td>
-                        <td><?php echo $value['referraldate'] ?></td>
-                        <td><?php if($value['referraltype'] == 1){ echo "OPD";}elseif($value['referraltype'] == 2){echo "ADDMISSION";}elseif($value['referraltype'] == 3){echo "DIAGNOSIS ONLY";}else{echo "N/A";}?></td>
-                        <td><?php echo $value['patientfirstname'].' '.$value['patientmiddlename'].' '.$value['patientlastname']  ?></td>
-                        <td><?php echo $value['mobileno'] ?></td>
-                        <td><?php echo $value['emailid']?></td>
-                        <td><?php echo $value['nationalid'] ?></td>
-                        <td><?php echo $value['xray'] ?></td>
-                        <td><?php echo $value['mri'] ?></td>
-                        <td><?php echo $value['ctscan'] ?></td>
-                        <td><?php echo $value['ultrasound'] ?></td>
-                        <td><?php echo $value['echoscan'] ?></td>
-                        <td><?php echo $value['branchcode'] ?></td>
-                       
-                        <td><?php echo $value['clinicalnotes'] ?></td>
-
-                        <td><?php echo $value['labtestdetails'] ?></td>
-                        <td><?php echo $value['radiologynotes'] ?></td>
-                        <td><?php echo $value['otherinvestigation'] ?></td>
-                        <?php $doctor_data = $this->db->where('id',$value['username'])->get('doctor')->result_array();
-                            foreach($doctor_data as $doctor){?>
-                        <td><?php echo $doctor['name']?></td>
-                        <td><?php echo $doctor['number']?></td>
-                        <td><?php echo $doctor['email']?></td>
-                        <td><?php echo $doctor['refer_code']?></td>
-                        <?php }?>
-                      
-                    </tr>
-                    <?php $i++;}?>
                   
               </tbody>
             </table>
@@ -185,7 +210,7 @@
 </div>
 
 
-<script>
+<!-- <script>
   $(document).ready(function() {
     $('#lowinventory').DataTable({
      
@@ -200,4 +225,104 @@
     });
 
   });
+</script> -->
+
+
+ 
+<script type="text/javascript">
+	$(document).ready(function(){
+	   	var userDataTable = $('#lowinventory').DataTable({
+	      	'processing': true,
+	      	'serverSide': true,
+	      	'serverMethod': 'post',
+	      	'pageLength':25,
+	      	'ajax': {
+	          'url':'<?=base_url()?>admin/referlist/addinventory_api',
+	          'data': function(data){
+	          		data.doctorId = $('#min').val();
+	          		// data.endDate = $('#max').val();
+	          	// 	data.searchName = $('#searchName').val();
+	          }
+	      	},
+	      	dom: 'Bfrtip',
+            "buttons": [
+                {
+                    "extend": 'excel',
+                    "text": '<button class="excel_button">Excel</button>',
+                    "titleAttr": 'Excel',
+                    "action": newexportaction,
+                    "exportOptions": {
+                        columns: ':not(:last-child)',
+                    },
+                    "filename": function () {
+                        return 'Refer Patient List';
+                    },
+                },
+                            
+                {
+                    "extend": 'csv',
+                    "text": '<button class="excel_button" >Csv</button>',
+                    "titleAttr": 'Csv',
+                    "action": newexportaction,
+                    "exportOptions": {
+                        columns: ':not(:last-child)',
+                    },
+                    "filename": function () {
+                      return 'Refer Patient List';
+                    },
+                }
+            ],
+	      	
+	   	});
+
+	   	$('#min,#max').change(function(){
+	   		userDataTable.draw();
+	   	});
+	   	
+	   	
+	   	function newexportaction(e, dt, button, config) {
+            var self = this;
+            var oldStart = dt.settings()[0]._iDisplayStart;
+            dt.one('preXhr', function (e, s, data) {
+                // Just this once, load all data from the server...
+                data.start = 0;
+                data.length = 2147483647;
+                dt.one('preDraw', function (e, settings) {
+                    // Call the original action function
+                    if (button[0].className.indexOf('buttons-copy') >= 0) {
+                        $.fn.dataTable.ext.buttons.copyHtml5.action.call(self, e, dt, button, config);
+                    } else if (button[0].className.indexOf('buttons-excel') >= 0) {
+                        $.fn.dataTable.ext.buttons.excelHtml5.available(dt, config) ?
+                        $.fn.dataTable.ext.buttons.excelHtml5.action.call(self, e, dt, button, config) :
+                        $.fn.dataTable.ext.buttons.excelFlash.action.call(self, e, dt, button, config);
+                    } else if (button[0].className.indexOf('buttons-csv') >= 0) {
+                        $.fn.dataTable.ext.buttons.csvHtml5.available(dt, config) ?
+                        $.fn.dataTable.ext.buttons.csvHtml5.action.call(self, e, dt, button, config) :
+                        $.fn.dataTable.ext.buttons.csvFlash.action.call(self, e, dt, button, config);
+                    } else if (button[0].className.indexOf('buttons-pdf') >= 0) {
+                        $.fn.dataTable.ext.buttons.pdfHtml5.available(dt, config) ?
+                        $.fn.dataTable.ext.buttons.pdfHtml5.action.call(self, e, dt, button, config) :
+                        $.fn.dataTable.ext.buttons.pdfFlash.action.call(self, e, dt, button, config);
+                    } else if (button[0].className.indexOf('buttons-print') >= 0) {
+                        $.fn.dataTable.ext.buttons.print.action(e, dt, button, config);
+                    }
+                    dt.one('preXhr', function (e, s, data) {
+                        // DataTables thinks the first item displayed is index 0, but we're not drawing that.
+                        // Set the property to what it was before exporting.
+                        settings._iDisplayStart = oldStart;
+                        data.start = oldStart;
+                    });
+                    // Reload the grid with the original page. Otherwise, API functions like table.cell(this) don't work properly.
+                    setTimeout(dt.ajax.reload, 0);
+                    // Prevent rendering of the full data to the DOM
+                    return false;
+                });
+            });
+            // Requery the server with the new one-time export settings
+            dt.ajax.reload();
+        };
+	});
+	
+	
+
 </script>

@@ -9,6 +9,7 @@ class Referlist extends CI_controller
       redirect('admin/login');
     }
     $this->load->model('admin/Usermodel');
+    $this->load->model('admin/Refermodel');
   }
 
   public function index()
@@ -20,6 +21,16 @@ class Referlist extends CI_controller
     $this->load->view('admin/referlist');
     $this->load->view('admin/template/footer');
   }
+
+  public function addinventory_api(){
+      
+    $postData = $this->input->post();
+    // print_r($postData);
+    // Get data
+    $data = $this->Refermodel->fetch_refer_admin_data($postData);
+    echo json_encode($data);
+}
+
 
 
   public function deletecontactdetail()
