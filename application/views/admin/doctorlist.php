@@ -119,8 +119,12 @@
                           foreach($speciality_list as $speciality){
                             for($i=0; $i<$length; $i++){
                               if($speciality['id'] == $createArray[$i]){
-                                echo $speciality['speciality_name']. " ,";
-                              }
+                                if($i == 0){
+                                    echo $speciality['speciality_name'];
+                                }else{
+                                    echo ', '.$speciality['speciality_name'];
+                                }
+                            }
                             }
                           }
                         ?></td>

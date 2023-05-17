@@ -75,10 +75,7 @@
               <thead>
                 <tr>
                         <th>Sr. No.</th>
-                        <th>Doctor / Hospital Name</th>
-                        <th>Doctor/Hospital No.</th>
-                        <th>Doctor/Hospital email</th>
-                        <th>Doctor/Hospital Refer Code</th>
+                        
                         <th>Referral Number</th>
                         <th>Refferal date</th>
                         <th>Refferal Type</th>
@@ -97,7 +94,10 @@
                         <th>Labtest Details</th>
                         <th>Radiology Notes</th>
                         <th>Other Investigation</th>
-     
+                        <th>Doctor / Hospital Name</th>
+                        <th>Doctor/Hospital No.</th>
+                        <th>Doctor/Hospital email</th>
+                        <th>Doctor/Hospital Refer Code</th>
 
                 </tr>
 
@@ -108,13 +108,7 @@
                   <?php $i = 1; foreach($refer_list as $value){?>
                     <tr>
                         <td><?php echo $i;?></td>
-                        <?php $doctor_data = $this->db->where('id',$value['username'])->get('doctor')->result_array();
-                            foreach($doctor_data as $doctor){?>
-                        <td><?php echo $doctor['name']?></td>
-                        <td><?php echo $doctor['number']?></td>
-                        <td><?php echo $doctor['email']?></td>
-                        <td><?php echo $doctor['refer_code']?></td>
-                        <?php }?>
+                        
 
 
                         <td><?php echo $value['referralno'] ?></td>
@@ -136,7 +130,13 @@
                         <td><?php echo $value['labtestdetails'] ?></td>
                         <td><?php echo $value['radiologynotes'] ?></td>
                         <td><?php echo $value['otherinvestigation'] ?></td>
-
+                        <?php $doctor_data = $this->db->where('id',$value['username'])->get('doctor')->result_array();
+                            foreach($doctor_data as $doctor){?>
+                        <td><?php echo $doctor['name']?></td>
+                        <td><?php echo $doctor['number']?></td>
+                        <td><?php echo $doctor['email']?></td>
+                        <td><?php echo $doctor['refer_code']?></td>
+                        <?php }?>
                       
                     </tr>
                     <?php $i++;}?>

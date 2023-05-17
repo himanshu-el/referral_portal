@@ -71,21 +71,32 @@
   .radio_label{
     margin-left:10px;
   }
+
+  .success_mesg{
+        width:500px;
+        position: fixed;
+        right:20px;
+        top:20px;
+        z-index: 1000;
+        opacity: 1 !important;
+        color:white !important;
+    }
 </style>
 
 <?php $speciality_list = $this->db->get('speciality')->result_array();?>
 
 <div class="new-post">
     <div class="container">
-        <?php
-        if ($this->session->flashdata('success')) {
-            echo '<div class="alert alert-success">' . $this->session->flashdata('success') . '</div>';
-        } else if ($this->session->flashdata('error')) {
-            echo '<div class="alert alert-danger">' . $this->session->flashdata('error') . '</div>';
-        }
-        ?>
+                <div class="success_mesg" id="success_msg"></div>
+                <div class="success_mesg" id="branch_error"></div>
+                <div class="success_mesg" id="error_msg"></div>
+
+
+
+
         <h3>Add Doctor / Hospital</h3>
-        <form method="post" action="<?php echo base_url()?>admin/createdoctor/create" enctype="multipart/form-data">
+        <!-- <form method="post" action="<?php echo base_url()?>admin/createdoctor/create" enctype="multipart/form-data"> -->
+        <?php echo form_open(base_url( 'admin/createdoctor/create'), array('id'=>'doctorForm','method'=>'POST', 'enctype'=>"multipart/form-data"));?>
             <div class="row">
                 <div class="col-md-12">
                     <div class="box">
@@ -265,7 +276,7 @@
                     </div>
                 </div>
             </div>
-        </form>
+            <?php echo form_close(); ?>
     </div>
 </div>
 
@@ -344,6 +355,74 @@ jQuery(document).ready(function($){
 }); 
 });
 
+</script>
+
+
+
+
+
+
+<script>
+
+    $("#doctorForm").submit(function(event){
+	event.preventDefault();
+	var post_url = $(this).attr("action"); 
+	var request_method = $(this).attr("method"); 
+	var form_data = $(this).serialize(); 
+	$.ajax({
+		url : post_url,
+        type: request_method,
+        dataType:"json",
+        data : form_data, 
+    }).done(function(response){ 
+
+
+        console.log(response);
+
+		if(response.status == "error"){
+            $('#branch_error').html(`<div class="alert alert-danger d-flex align-items-center" role="alert"><svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg><div>${response.userType} ${response.name} ${response.speciality} ${response.number} ${response.mobileno} ${response.email} ${response.address_line1} ${response.address_line2} ${response.address_line3} ${response.city} ${response.po_box} ${response.payment_method} ${response.refer_code}</div></div>`);
+            $('#success_msg').html('');
+            $('#error_msg').html('');
+
+            setTimeout(function() {
+                $('#branch_error').html('');
+            }, 3000);
+        }else if(response.status == "dberror"){
+            $('#error_msg').html(`<div class="alert alert-danger d-flex align-items-center" role="alert"><svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg><div>${response.msg}</div></div>`);
+            setTimeout(function() {
+                $('#error_msg').html('');
+            }, 3000)
+            
+        }else if(response.status == "dberror"){
+            // $('#branch_error').html('');
+            // $('#email').html('');
+            // $('#mob_number').html('');
+            // $('#national_id').html('');
+            // $('#first_name').html('');
+            // $('#last_name').html('');
+            // $('#referral_type').html('');
+            // $('#success_msg').html('');
+            $('#error_msg').html(`<div class="alert alert-danger d-flex align-items-center" role="alert"><svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg><div>${response.msg}</div></div>`);
+            setTimeout(function() {
+                $('#error_msg').html('');
+            }, 3000)
+        }else{
+            // $('#error_msg').html('');
+            // $('#branch_error').html('');
+            // $('#email').html('');
+            // $('#mob_number').html('');
+            // $('#national_id').html('');
+            // $('#first_name').html('');
+            // $('#last_name').html('');
+            // $('#referral_type').html('');
+            $('#success_msg').html(`<div class="alert alert-success d-flex align-items-center" role="alert"><svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg><div>${response.msg}</div></div>`);
+            document.getElementById("doctorForm").reset();
+            setTimeout(function() {
+                $('#success_msg').html('');
+            }, 3000)
+        }
+	});
+});
 </script>
 
 

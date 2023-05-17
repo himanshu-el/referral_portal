@@ -11,6 +11,7 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" >
     <link href="<?php echo base_url(); ?>/assets/css/style.css" rel="stylesheet" type='text/css' />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
 </head>
 
 <?php $user_data = $this->db->where('id',$_SESSION['user_id'])->get('doctor')->result_array();
@@ -54,9 +55,9 @@ foreach($user_data as $value){
         <div class="sidebar-logo"> <a href="#"> <img src="<?php echo base_url()?>assets/img/logo2.png" alt="img" /> </a>  </div>
         <div class="menu-list"> 
             <ul class="menulist1">
-                <li> <a href="<?php echo base_url()?>user/dashboard"><img src="<?php echo base_url()?>assets/img/icon1.png"> Dashboard </a> </li>
-                <li> <a href="<?php echo base_url()?>user/referuser"><img src="<?php echo base_url()?>assets/img/icon1.png"> Refer Patient </a> </li>
-                <li> <a href="<?php echo base_url()?>user/referlist"><img src="<?php echo base_url()?>assets/img/icon1.png"> Refer Patient List</a> </li>
+                <li> <a href="<?php echo base_url()?>user/dashboard"><img src="<?php echo base_url()?>assets/img/dashbiardd.svg"> Dashboard </a> </li>
+                <li> <a href="<?php echo base_url()?>user/referuser"><img src="<?php echo base_url()?>assets/img/refer.svg"> Refer Patient </a> </li>
+                <li> <a href="<?php echo base_url()?>user/referlist"><img src="<?php echo base_url()?>assets/img/referlist.svg"> Refer Patient List</a> </li>
             </ul>
             <!-- <h4> Master </h4>
             <ul class="menulist2">

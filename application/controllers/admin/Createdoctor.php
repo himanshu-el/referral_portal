@@ -24,20 +24,20 @@ class Createdoctor extends CI_controller
   {
     $this->load->model('admin/Usermodel');
       $this->input->post('formSubmit');
-      $this->form_validation->set_rules('userType', 'state', 'required');
-      $this->form_validation->set_rules('name', 'shipment_port', 'required');
-      $this->form_validation->set_rules('speciality', 'link', 'required');
-      $this->form_validation->set_rules('number', 'state', 'required');
-      $this->form_validation->set_rules('email', 'address', 'required|is_unique[doctor.email]');
-      $this->form_validation->set_rules('address_line1', 'link', 'required');
-      $this->form_validation->set_rules('address_line2', 'link', 'required');
-      $this->form_validation->set_rules('address_line3', 'link', 'required');
-      $this->form_validation->set_rules('city', 'link', 'required');
-      $this->form_validation->set_rules('po_box', 'link', 'required');
-      $this->form_validation->set_rules('payment_method', 'Name', 'required');
-      $this->form_validation->set_rules('refer_code', 'Name', 'required');
+      $this->form_validation->set_rules('userType', 'User Type', 'required');
+      $this->form_validation->set_rules('name', 'Name', 'required');
+      $this->form_validation->set_rules('speciality', 'Speciality', 'required');
+      $this->form_validation->set_rules('number', 'Number', 'required');
+      $this->form_validation->set_rules('email', 'Email', 'required|is_unique[doctor.email]');
+      $this->form_validation->set_rules('address_line1', 'Address 1', 'required');
+      $this->form_validation->set_rules('address_line2', 'Address 2', 'required');
+      $this->form_validation->set_rules('address_line3', 'Address 3', 'required');
+      $this->form_validation->set_rules('city', 'City', 'required');
+      $this->form_validation->set_rules('po_box', 'PO Box', 'required');
+      $this->form_validation->set_rules('payment_method', 'Payment Method', 'required');
+      $this->form_validation->set_rules('refer_code', 'Reefer Code', 'required');
       
-      
+       
       if ($this->form_validation->run()) {
 
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -81,8 +81,16 @@ class Createdoctor extends CI_controller
           $account_number = $buy_goods_account_number;
           $registered_name = $buy_goods_regitered_name;
         }else{
-          $this->session->set_flashdata('error', 'Please Fill All The Fields');
-          redirect(base_url() . 'admin/createdoctor');
+          // $this->session->set_flashdata('error', 'Please Fill All The Fields');
+          // redirect(base_url() . 'admin/createdoctor');
+
+          $array = array(
+            'status'   => "paymentError",
+            'msg' => "Please Fill Payment Details",
+          );
+          echo json_encode($array);
+
+          exit();
         }
 
         $name = $this->input->post('name');
@@ -131,18 +139,46 @@ class Createdoctor extends CI_controller
 
         if ($this->Usermodel->create_doctor($data)) {
           $this->email->send();
-          $this->session->set_flashdata('success', 'User Created Successfully');
-          redirect(base_url() . 'admin/createdoctor');
+          // $this->session->set_flashdata('success', 'User Created Successfully');
+          // redirect(base_url() . 'admin/createdoctor');
+          $array = array(
+            'status'   => "success",
+            'msg' => 'Doctor Created Successfully!',
+        );
         } else {
 
-            $this->session->set_flashdata('error', 'Error In Submission');
-            redirect(base_url() . 'admin/createdoctor');
+            // $this->session->set_flashdata('error', 'Error In Submission');
+            // redirect(base_url() . 'admin/createdoctor');
+
+            $array = array(
+              'status'   => "dberror",
+              'msg' => 'Error In Submission!',
+          );
         }
           
       } else {
-          $this->session->set_flashdata('error', 'Please Fill All The Fields');
-          redirect(base_url() . 'admin/createdoctor');
+          // $this->session->set_flashdata('error', 'Please Fill All The Fields');
+          // redirect(base_url() . 'admin/createdoctor');
+
+          $array = array(
+            'status'   => "error",
+            'userType' => form_error('userType'),
+            'name' => form_error('name'),
+            'speciality' => form_error('speciality'),
+            'number' => form_error('number'),
+            'mobileno' => form_error('mobileno'),
+            'email' => form_error('email'),
+            'address_line1' => form_error('address_line1'),
+
+            'address_line2' => form_error('address_line2'),
+            'address_line3' => form_error('address_line3'),
+            'city' => form_error('city'),
+            'po_box' => form_error('po_box'),
+            'payment_method' => form_error('payment_method'),
+            'refer_code' => form_error('refer_code'),
+        );
       }
+      echo json_encode($array);
   }
 
 }

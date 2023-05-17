@@ -90,23 +90,23 @@
 
                         <div class='col-md-4 mb-3'>
                             <label>Patient First Name <span style="color:red;">*</span></label>
-                            <input type="text" name="patientfirstname" class="form-control" placeholder="Enter Patient First Name" required   maxlength="20" />
+                            <input type="text" name="patientfirstname" class="form-control" placeholder="Enter Patient First Name" required onkeydown="return /[a-z]/i.test(event.key)"  maxlength="20" />
                            
                         </div>
                         <div class='col-md-4 mb-3'>
                             <label>Patient Middle Name</label>
-                            <input type="text" name="patientmiddlename" class="form-control" placeholder="Enter Patient Middle Name"  maxlength="15"/>
+                            <input type="text" name="patientmiddlename" class="form-control" placeholder="Enter Patient Middle Name" onkeydown="return /[a-z]/i.test(event.key)"  maxlength="15"/>
                         </div>
                         <div class='col-md-4 mb-3'>
                             <label>Patient Last Name <span style="color:red;">*</span></label>
-                            <input type="text" name="patientlastname" class="form-control" placeholder="Enter Patient Last Name" required  maxlength="15"/>
+                            <input type="text" name="patientlastname" class="form-control" placeholder="Enter Patient Last Name" onkeydown="return /[a-z]/i.test(event.key)" required  maxlength="15"/>
                     
 
                         </div>
                         <div class='col-md-4 mb-3' id="result">
                             <label>Mobile Number <span style="color:red;">*</span></label>
                             <input type="hidden" id="fullNumber" name="mobileno" class="form-control" placeholder="Enter Mobile Number" required/>
-                            <input type="tel" name="phone_number[main]" id="phone_number"   class="form-control" required/>
+                            <input type="number" name="phone_number[main]" id="phone_number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxLength="10"  class="form-control" required/>
                            
 
                         </div>
@@ -130,15 +130,15 @@
 
                         <div class='col-md-12 mb-3'>
                             <label>Clinical Notes </label>
-                            <textarea name="clinicalnotes" id="" cols="30" rows="5" class="form-control" placeholder="Enter Clinical Notes"></textarea>
+                            <textarea name="clinicalnotes" id="" cols="30" rows="5" maxLength="2000" class="form-control" placeholder="Enter Clinical Notes"></textarea>
                         </div>
                         <div class='col-md-12 mb-3'>
                             <label>Labtest Details </label>
-                            <textarea name="labtestdetails" id="" cols="30" rows="5" class="form-control" placeholder="Enter Labtest Details"></textarea>
+                            <textarea name="labtestdetails" id="" cols="30" rows="5" maxLength="2000" class="form-control" placeholder="Enter Labtest Details"></textarea>
                         </div>
                         <div class='col-md-12 mb-3'>
                             <label>Radiology Notes </label>
-                            <textarea name="radiologynotes" id="" cols="30" rows="5" class="form-control" placeholder="Enter Radiology Notes"></textarea>
+                            <textarea name="radiologynotes" id="" cols="30" rows="5" maxLength="2000" class="form-control" placeholder="Enter Radiology Notes"></textarea>
                         </div>
 
                         <div class='col-md-2 mb-3'>
@@ -168,7 +168,7 @@
                         
                         <div class='col-md-12 mb-3'>
                             <label>Other Investigation </label>
-                            <textarea name="otherinvestigation" id="" cols="30" rows="5" class="form-control" placeholder="Enter Other Investigation"></textarea>
+                            <textarea name="otherinvestigation" id="" cols="30" maxLength="2000" rows="5" class="form-control" placeholder="Enter Other Investigation"></textarea>
                         </div>
                         
                         <div class='col-6'>

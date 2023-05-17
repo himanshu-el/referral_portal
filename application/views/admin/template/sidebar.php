@@ -35,6 +35,10 @@
     background-color: #23282d !important;
 
   }
+  .admin_logo{
+    width:200px !important;
+    height:auto !important;
+  }
 </style>
 
 <?php if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'ON') {
@@ -68,10 +72,12 @@ $parts = basename($url);
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item <?php echo ($parts == 'welcome') ? "active" : "" ?>">
+        <li class="nav-item ">
           <a class="nav-link  " href="<?php echo base_url(); ?>welcome">
-            <i class="fas fa-fw fa-tachometer-alt" style="color:white; font-size:1.5rem;"></i>
-            <span>Dashboard</span></a>
+            <!-- <i class="fas fa-fw fa-tachometer-alt" style="color:white; font-size:1.5rem;"></i>
+            <span>Dashboard</span></a> -->
+            <img src="<?php echo base_url()?>assets/img/logo.png"  class="admin_logo" >
+</a>
           <span class="sr-only">
             (current)
           </span>
@@ -95,18 +101,18 @@ $parts = basename($url);
         </li> -->
 
         <li class="nav-item <?php echo ($parts == 'createdoctor') ? "active" : "" ?>">
-          <a class="nav-link " href="<?php echo base_url(); ?>admin/createdoctor"><i class="fas fa-fw fa-table"></i><span>Add Doctor / Hospital</span></a>
+          <a class="nav-link " href="<?php echo base_url(); ?>admin/createdoctor"><i class="fas fa-user-plus"></i><span style="margin-left:5px;">Add Doctor / Hospital</span></a>
         </li>
 
         <li class="nav-item <?php echo ($parts == 'doctorlist') ? "active" : "" ?>">
-          <a class="nav-link " href="<?php echo base_url(); ?>admin/doctorlist"><i class="fas fa-fw fa-table"></i><span>Doctor / Hospital list</span></a>
+          <a class="nav-link " href="<?php echo base_url(); ?>admin/doctorlist"><i class="fas fa-list"></i><span  style="margin-left:5px;">Doctor / Hospital list</span></a>
         </li>
         <li class="nav-item <?php echo ($parts == 'speciality') ? "active" : "" ?>">
-          <a class="nav-link " href="<?php echo base_url(); ?>admin/speciality"><i class="fas fa-fw fa-table"></i><span>Speciality</span></a>
+          <a class="nav-link " href="<?php echo base_url(); ?>admin/speciality"><i class="fas fa-fw fa-table"></i  style="margin-left:5px;"><span>Speciality</span></a>
         </li>
 
         <li class="nav-item <?php echo ($parts == 'referlist') ? "active" : "" ?>">
-          <a class="nav-link " href="<?php echo base_url(); ?>admin/referlist"><i class="fas fa-fw fa-table"></i><span>Refer Patient List</span></a>
+          <a class="nav-link " href="<?php echo base_url(); ?>admin/referlist"><i class="fas fa-list"></i><span  style="margin-left:5px;">Refer Patient List</span></a>
         </li>
         <!-- Nav Item - Charts -->
 
