@@ -87,6 +87,28 @@
     color:white;
     margin-right:.5rem;
   }
+  .flex{
+    width:100%;
+    height:auto;
+    display:flex;
+    margin-top:-4rem;
+  }
+  .flex .card{
+    width:50%;
+    height:auto;
+    background:transparent;
+    border:none;
+    padding-left: 0.5em;
+  }
+  .date_class{
+    width:100%;
+    height:auto;
+    padding:.5rem;
+    /* margin:1rem; */
+    border:1px solid #cdcdcd;
+    outline:none;
+    border-radius:6px;
+  }
 </style>
 
 <?php 
@@ -100,14 +122,18 @@
   <div class="container">
     <h3>Refer Patient List</h3>
     <hr>
+
+
+
+     
+
     <h4>Fillter Doctor / Hospital Name</h4>
         <div class="date_filter">
-            
             <div class="row">
                 <div class="col-md-5">
                     <!-- <input type="text"  name="min" id="min"  placeholder="Enter First date" autocomplete="off"/>  -->
                     
-                    <select class="doctor_select" name="min" id="min">
+                    <select class="doctor_select" name="filterdoctor" id="filterdoctor">
                         <option value="">Please Select Doctor / Hospital </option>
                         <?php foreach($doctor_list as $doctors){?>
                         <option value="<?php echo $doctors['id']?>"><?php echo $doctors['name']?> (<?php echo $doctors['email']?>)</option>
@@ -115,7 +141,16 @@
                     </select>
                 </div>
                 <div class="col-md-7">
-                    
+                  <div class="flex">
+                        <div class="card">
+                            <h4 for="">Strat Date</h4>
+                            <input type="text" class="date_class" name="min" id="min"  placeholder="Enter First date" autocomplete="off"/>
+                        </div>
+                        <div class="card">
+                            <h4 for="">End Date</h4>
+                            <input type="text" name="max" class="date_class" id="max" placeholder="Enter Second date" autocomplete="off"/>
+                        </div>
+                    </div>
                 </div>
             </div>    
           
@@ -243,9 +278,9 @@
 	      	'ajax': {
 	          'url':'<?=base_url()?>admin/referlist/addinventory_api',
 	          'data': function(data){
-	          		data.doctorId = $('#min').val();
-	          		// data.endDate = $('#max').val();
-	          	// 	data.searchName = $('#searchName').val();
+	          		data.doctorId = $('#filterdoctor').val();
+	          		data.startDate = $('#min').val();
+	          		data.endDate = $('#max').val();
 	          }
 	      	},
 	      	dom: 'Bfrtip',
@@ -274,12 +309,31 @@
                     "filename": function () {
                       return 'Refer Patient List';
                     },
+                },
+                {
+                    "extend": 'pdfHtml5',
+                    "text": '<button class="excel_button" >Pdf</button>',
+                    "titleAttr": 'Pdf',
+                    "orientation" : 'landscape',
+                    "pageSize" : 'A2',
+
+                    "action": newexportaction,
+                    "exportOptions": {
+                        columns: ':not(:last-child)',
+                    },
+                    "filename": function () {
+                      return 'Refer Patient List';
+                    },
                 }
             ],
 	      	
 	   	});
 
 	   	$('#min,#max').change(function(){
+	   		userDataTable.draw();
+	   	});
+
+       $('#filterdoctor').change(function(){
 	   		userDataTable.draw();
 	   	});
 	   	
@@ -329,4 +383,36 @@
 	
 	
 
+</script>
+
+
+<script>
+$(function() {
+  $('#min').daterangepicker({
+    singleDatePicker: true,
+    showDropdowns: true,
+    minYear: 1901,
+    locale: {
+        format: 'DD/MM/YYYY'
+    }
+  
+  }, function(start, end, label) {
+   
+  });
+});
+</script>
+
+<script>
+$(function() {
+  $('#max').daterangepicker({
+    singleDatePicker: true,
+    showDropdowns: true,
+    minYear: 1901,
+    locale: {
+        format: 'DD/MM/YYYY'
+    }
+  }, function(start, end, label) {
+    
+  });
+});
 </script>

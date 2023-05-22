@@ -22,9 +22,13 @@ class Refermodel extends CI_Model
   
     // Custom search filter 
     $doctorId = $postData['doctorId'];
-    // $endDate = $postData['endDate'];
+    $startDate = $postData['startDate'];
+    $endDate = $postData['endDate'];
+
+    
+
   
-    // if($doctorId != null){
+    if($startDate != null && $endDate != null){
         ## Search 
         $search_arr = array();
         $searchQuery = "";
@@ -53,6 +57,31 @@ class Refermodel extends CI_Model
                 referralno like'%".$searchValue."%' or
                 referraldate like'%".$searchValue."%'
             ) ";
+        }
+
+        date_default_timezone_set('Asia/Kolkata');
+        $currntdate = date("d/m/Y");
+        
+        if($startDate == $currntdate && $endDate == $currntdate){
+            
+            $getadminreferdata = $this->db->order_by('patient_id ','asc')->limit(1)->get('patient')->result_array();
+            foreach($getadminreferdata as $valll){
+                $firstdate = $valll['referraldate'];
+            }
+            $startDatee = $firstdate;
+            $endDatee = $currntdate;
+        }else{
+            $startDatee = $startDate;
+            $endDatee = $endDate;
+        }
+        
+        if($startDatee != '' && $endDatee != ''){
+                $explodeStartDate = explode('/',$startDatee);
+                $explodeEndDate = explode('/',$endDatee);
+                $startddd = $explodeStartDate[2]."/".$explodeStartDate[1]."/".$explodeStartDate[0];
+                $endddd = $explodeEndDate[2]."/".$explodeEndDate[1]."/".$explodeEndDate[0];
+     
+                $search_arr[] = " str_to_date(referraldate, '%d/%m/%Y') BETWEEN '".$startddd."' and  '".$endddd."' ";
         }
 
         if($doctorId){
@@ -127,9 +156,9 @@ class Refermodel extends CI_Model
 
         return $response;
       
-//   }else{
-//       return "No Raw Found!";
-//   }
+  }else{
+      return "No Raw Found!";
+  }
 
 }
 
