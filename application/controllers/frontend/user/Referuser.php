@@ -165,4 +165,42 @@ class Referuser extends CI_controller
         echo json_encode($array);
     }
 
+
+    public function checkuser(){
+        $nationalid = $this->input->post('nationalid');
+        $doctor_id = $_SESSION['user_id'];
+
+        $user_data = $this->db->where('username',$doctor_id)->where('nationalid',$nationalid)->get('patient')->result_array();
+
+        if($user_data == null){
+
+           
+            $data = array(
+                'status' => "error",
+                'msg' => "No User Found",    
+            );
+            echo json_encode($data);
+
+            
+        }else{
+            foreach($user_data as $user){
+                $patientfirstname = $user['patientfirstname'];
+                $patientlastname = $user['patientlastname'];
+                $patientmiddlename = $user['patientmiddlename'];
+                $number = $user['mobileno'];
+                $emailid = $user['emailid'];
+            }
+            $data = array(
+                'status' => "Success",
+                'patientfirstname' => $patientfirstname,
+                'patientlastname' => $patientlastname,
+                'patientmiddlename' => $patientmiddlename,  
+                'number' => $number,
+                'emailid' => $emailid  
+            );
+            echo json_encode($data);
+        }
+
+    }
+
 }

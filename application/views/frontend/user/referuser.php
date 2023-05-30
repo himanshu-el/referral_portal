@@ -83,23 +83,23 @@
                         </div>
                         <div class='col-md-6 mb-3'>
                             <label>National Id <span style="color:red;">*</span></label>
-                            <input type="text" name="nationalid" class="form-control" placeholder="Enter National Id" required maxlength="20"/>
+                            <input type="text" name="nationalid" class="form-control" id="nationalid" onkeyup="fetchPincode()" placeholder="Enter National Id" required maxlength="20"/>
                     
                         </div>
                         
 
                         <div class='col-md-4 mb-3'>
                             <label>Patient First Name <span style="color:red;">*</span></label>
-                            <input type="text" name="patientfirstname" class="form-control" placeholder="Enter Patient First Name" required onkeydown="return /[a-z]/i.test(event.key)"  maxlength="20" />
+                            <input type="text" name="patientfirstname" class="form-control" id="firstname" placeholder="Enter Patient First Name" required onkeydown="return /[a-z]/i.test(event.key)"  maxlength="20" />
                            
                         </div>
                         <div class='col-md-4 mb-3'>
                             <label>Patient Middle Name</label>
-                            <input type="text" name="patientmiddlename" class="form-control" placeholder="Enter Patient Middle Name" onkeydown="return /[a-z]/i.test(event.key)"  maxlength="15"/>
+                            <input type="text" name="patientmiddlename" class="form-control" id="middlename" placeholder="Enter Patient Middle Name" onkeydown="return /[a-z]/i.test(event.key)"  maxlength="15"/>
                         </div>
                         <div class='col-md-4 mb-3'>
                             <label>Patient Last Name <span style="color:red;">*</span></label>
-                            <input type="text" name="patientlastname" class="form-control" placeholder="Enter Patient Last Name" onkeydown="return /[a-z]/i.test(event.key)" required  maxlength="15"/>
+                            <input type="text" name="patientlastname" class="form-control" id="lastname" placeholder="Enter Patient Last Name" onkeydown="return /[a-z]/i.test(event.key)" required  maxlength="15"/>
                     
 
                         </div>
@@ -112,7 +112,7 @@
                         </div>
                         <div class='col-md-4 mb-3'>
                             <label>Email <span style="color:red;">*</span></label>
-                            <input type="email" name="emailid" class="form-control" placeholder="Enter Email" required  maxlength="25"/>
+                            <input type="email" name="emailid" class="form-control" id="email" placeholder="Enter Email" required  maxlength="100"/>
                             
                         </div>
 
@@ -251,6 +251,37 @@
 });
 </script>
 
+<script>
+    function fetchPincode() {
+        var nationalid = $('#nationalid').val();
+
+        // if(pincodelength == 6){
+            $.ajax({
+                url:'<?php echo base_url('frontend/user/referuser/checkuser');?>',
+                type:'POST',
+                data: {nationalid:nationalid},
+                success:function(data){
+                    
+                    var parseData = JSON.parse(data);
+                    console.log(parseData);
+                    if(parseData.status == "Success"){
+                        $("#firstname").val(parseData.patientfirstname);
+                        $("#middlename").val(parseData.patientmiddlename);
+                        $("#lastname").val(parseData.patientlastname);
+                        $("#email").val(parseData.emailid);
+                    }else{
+                        $("#firstname").val('');
+                        $("#middlename").val('');
+                        $("#lastname").val('');
+                        $("#email").val('');
+                    }
+                }
+            });
+        // }else{
+        //     console.log('Please Enter Correct Pincode!');
+        // }
+    }
+</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/intlTelInput.min.js"></script>
 
