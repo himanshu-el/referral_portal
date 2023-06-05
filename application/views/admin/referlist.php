@@ -184,13 +184,14 @@
                         <th>Mobile Number</th>
                         <th>Email Id</th>
                         <th>National Id</th>
+                        <th>Specialitycode</th>
                         <th>Xray</th>
                         <th>MRI</th>
                         <th>Ct scan</th>
                         <th>Ultra Sound</th>
                         <th>Echo Scan</th>
                         <th>Branch Code</th>
-                        <!-- <th>pecialitycode</th> -->
+                        
                         <th>Clinical Notes</th>
                         <th>Labtest Details</th>
                         <th>Radiology Notes</th>

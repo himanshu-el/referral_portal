@@ -1,4 +1,4 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="<?php echo base_url()?>assets/js/ajaxjquery.min.js"></script>
 
 
 <?php $doctor_data = $this->db->where('id',$_SESSION["user_id"])->get('doctor')->result_array(); 
@@ -39,6 +39,8 @@
         
 
 
+
+
 ?>
 
 
@@ -57,6 +59,7 @@
                         <th>Mobile Number</th>
                         <th>Email Id</th>
                         <th>National Id</th>
+                        <th>Speciality</th>
                         <th>Xray</th>
                         <th>MRI</th>
                         <th>Ct scan</th>
@@ -75,7 +78,7 @@
                     <?php $i = 1; 
                    
                     
-                    foreach($refer_list as $value){?>
+                    foreach($refer_list as $value){ $speciality = $this->db->get('speciality')->result_array();?>
                     <tr>
                         <td><?php echo $i;?></td>
                         <td><?php echo $value['referralno'] ?></td>
@@ -85,13 +88,16 @@
                         <td><?php echo $value['mobileno'] ?></td>
                         <td><?php echo $value['emailid']?></td>
                         <td><?php echo $value['nationalid'] ?></td>
+                        <?php foreach($speciality as $specialitycode){ if($specialitycode['speciality_code'] == $value['specialitycode']){?>
+                        <td><?php echo $specialitycode['speciality_name'] ?></td>
+                        <?php }}?>
                         <td><?php echo $value['xray'] ?></td>
                         <td><?php echo $value['mri'] ?></td>
                         <td><?php echo $value['ctscan'] ?></td>
                         <td><?php echo $value['ultrasound'] ?></td>
                         <td><?php echo $value['echoscan'] ?></td>
                         <td><?php echo $value['branchcode'] ?></td>
-                        <!-- <td><?php echo $value['specialitycode'] ?></td> -->
+                        
                         <td><?php echo $value['clinicalnotes'] ?></td>
 
                         <td><?php echo $value['labtestdetails'] ?></td>

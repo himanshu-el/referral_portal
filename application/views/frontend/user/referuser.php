@@ -43,8 +43,8 @@
   </symbol>
 </svg>
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/css/intlTelInput.min.css" rel="stylesheet"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="<?php echo base_url()?>assets/css/intlTelInput.min.css" rel="stylesheet"/>
+<script src="<?php echo base_url()?>assets/js/jquery.min.js"></script>
 
 <div class="content editprofile-page">
     <div class="container">
@@ -172,7 +172,13 @@
                         </div>
                         
                         <div class='col-6'>
-                            <input type="submit" class='btn' value='Refer' />
+                            <input type="submit" class='btn' value='Refer' id="submit_form"/>
+
+                            <button class="btn btn-primary" type="button" id="loading_botton" disabled>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Loading...
+                            </button>
+
                         </div>
 
                         
@@ -192,13 +198,16 @@
 
 
 <script>
-
+$('#loading_botton').hide();
+$('#submit_form').show();
+    // $('#submit_form').hide();
     $("#referForm").submit(function(event){
 	event.preventDefault();
 	var post_url = $(this).attr("action"); 
 	var request_method = $(this).attr("method"); 
 	var form_data = $(this).serialize(); 
-	
+	$('#loading_botton').show();
+    $('#submit_form').hide();
 	$.ajax({
 		url : post_url,
         type: request_method,
@@ -219,6 +228,8 @@
                 $('#last_name').html('');
                 $('#referral_type').html('');
             }, 3000)
+            $('#loading_botton').hide();
+            $('#submit_form').show();
         }else if(response.status == "apierror"){
             $('#branch_error').html('');
             $('#email').html('');
@@ -232,6 +243,8 @@
             setTimeout(function() {
                 $('#error_msg').html('');
             }, 3000)
+            $('#loading_botton').hide();
+            $('#submit_form').show();
         }else{
             $('#error_msg').html('');
             $('#branch_error').html('');
@@ -246,6 +259,8 @@
             setTimeout(function() {
                 $('#success_msg').html('');
             }, 3000)
+            $('#loading_botton').hide();
+            $('#submit_form').show();
         }
 	});
 });
@@ -263,7 +278,7 @@
                 success:function(data){
                     
                     var parseData = JSON.parse(data);
-                    console.log(parseData);
+                    // console.log(parseData);
                     if(parseData.status == "Success"){
                         $("#firstname").val(parseData.patientfirstname);
                         $("#middlename").val(parseData.patientmiddlename);
@@ -283,14 +298,14 @@
     }
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/intlTelInput.min.js"></script>
+<script src="<?php echo base_url()?>assets/js/intlTelInput.min.js"></script>
 
 <script>
 var phone_number = window.intlTelInput(document.querySelector("#phone_number"), {
   separateDialCode: true,
   preferredCountries:["ke","in"],
   hiddenInput: "full",
-  utilsScript: "//cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/utils.js"
+  utilsScript: "<?php echo base_url()?>assets/js/intelutils.js"
 });
 
 $("#phone_number").keyup(function(){

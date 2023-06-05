@@ -142,7 +142,13 @@ class Refermodel extends CI_Model
                 }
             }
 
-            $data[] = array($i,$record->referralno,$record->referraldate,$referType,$record->patientfirstname .' '.$record->patientmiddlename.' '.$record->patientlastname , $record->mobileno, $record->emailid, $record->nationalid, $record->xray, $record->mri, $record->ctscan, $record->ultrasound, $record->echoscan, $record->branchcode, $record->clinicalnotes, $record->labtestdetails, $record->radiologynotes, $record->otherinvestigation, $doctor_name, $doctor_number, $doctor_email, $doctor_code);
+            $speciality = $this->db->where('speciality_code', $record->specialitycode)->get('speciality')->result_array();
+            $spscode = '';
+            foreach($speciality as $specialitycodef){ 
+                $spscode = $specialitycodef['speciality_name'];
+            }
+
+            $data[] = array($i,$record->referralno,$record->referraldate,$referType,$record->patientfirstname .' '.$record->patientmiddlename.' '.$record->patientlastname , $record->mobileno, $record->emailid, $record->nationalid,$spscode, $record->xray, $record->mri, $record->ctscan, $record->ultrasound, $record->echoscan, $record->branchcode, $record->clinicalnotes, $record->labtestdetails, $record->radiologynotes, $record->otherinvestigation, $doctor_name, $doctor_number, $doctor_email, $doctor_code);
                 $i++;
         }
 
