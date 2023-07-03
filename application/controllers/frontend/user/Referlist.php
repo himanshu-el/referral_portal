@@ -20,12 +20,17 @@ class Referlist extends CI_controller
 
 
     public function referlist(){
-        $user_data = $this->db->where('id',$_SESSION['user_id'])->get('doctor')->result_array();
-        foreach($user_data as $value){
+       
+        $doctor_data = $this->db->where('id',$_SESSION["user_id"])->get('doctor')->result_array(); 
+        
+        foreach($doctor_data as $doctor){
+            $doctor_id = $doctor['id'];
             $username = $value['email'];
             $referCode = $value['refer_code'];
         }
-        // print_r($referCode);
+
+        $refer_list = $this->db->where('username',$doctor_id)->get('patient')->result_array();
+
         $data = array(
             'referalcode'      => $referCode,
             'apikey' => 'tdfdf24614f53bbf00e6054cb9752530b8533c1nbb7357ef4e27e8ab7c29wd74f29h',
@@ -52,14 +57,44 @@ class Referlist extends CI_controller
         }
 
 
-        // print_r($newData);
-
-        if($newData == null){
-            $arrya_json[] = array('','','','No Record Found','','','','');
+        if($refer_list == null){
+            $arrya_json[] = array('','','','','','','','','','No Record Found','','','','','','','','','','');
         }else{
             $i = 1;
-            foreach ($newData as $key => $value) { 
-                $arrya_json[] = array($i, $value->REFERALNUMBER,$value->REFERALDATE,$value->REFERALTYPE,$value->PATIENTNAME,$value->MOBILENUMBER, $value->NATIONALID, $value->PATIENTVISITED);
+            foreach ($refer_list as $key => $value) { 
+                $speciality = $this->db->get('speciality')->result_array();
+
+                $refer_type = '';
+
+                if($value['referraltype'] == 1){ 
+                    $refer_type =  "OPD";
+                }elseif($value['referraltype'] == 2){
+                    $refer_type =  "ADDMISSION";
+                }elseif($value['referraltype'] == 3){
+                    $refer_type = "DIAGNOSIS ONLY";
+                }else{
+                    $refer_type =  "N/A";
+                }
+
+                $patientName = $value['patientfirstname'] .' '. $value['patientmiddlename'] .' '. $value['patientlastname'];
+
+
+                $speci= '';  
+                foreach($speciality as $specialitycode){ 
+                    if($specialitycode['speciality_code'] == $value['specialitycode']){ 
+                        $speci = $specialitycode['speciality_name']; 
+                    }
+                }
+
+
+                $isPatientVisited = '';
+
+                foreach($newData as $referApidata){
+                    if($referApidata->REFERALNUMBER == $value['referralno']){
+                        $isPatientVisited =  $referApidata->PATIENTVISITED;
+                    }}
+
+                $arrya_json[] = array($i, $value['referralno'],$value['referraldate'],$refer_type,$patientName,$value['mobileno'], $value['emailid'], $value['nationalid'],$speci,$value['xray'],$value['mri'],$value['ctscan'],$value['ultrasound'],$value['echoscan'],$value['branchcode'],$value['clinicalnotes'],$value['labtestdetails'],$value['radiologynotes'],$value['otherinvestigation'],$isPatientVisited);
             $i++;}
         }
 
